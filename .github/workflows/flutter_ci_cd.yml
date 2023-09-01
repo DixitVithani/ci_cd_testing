@@ -1,35 +1,69 @@
-name: Flutter CI/CD
+#name: Flutter CI/CD
+#
+#on:
+#  push:
+#    branches:
+#      - master
+#
+#jobs:
+#  build:
+#    name: Build and Test
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout Repository
+#        uses: actions/checkout@v2
+#
+#      - name: Setup Flutter
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.10.5'
+#
+#      - name: Install Dependencies
+#        run: flutter pub get
+#
+#      - name: Build and Test
+#        run: flutter test
+#
+#      - name: Build apk
+#        run: flutter build apk
+#
+#      - name: Deploy APK
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-release
+#          path: app/build/outputs/apk/release/app-release.apk
+
+
+name: Deploy to Firebase
 
 on:
   push:
     branches:
-      - master
+      - main  # Modify to your main branch name
 
 jobs:
   build:
-    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v6
         with:
-          flutter-version: '3.10.5'
+          flutter-version: '2.x'  # Specify your Flutter version
 
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build and Test
-        run: flutter test
-
-      - name: Build apk
+      - name: Build APK
         run: flutter build apk
 
-      - name: Deploy APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-release
-          path: app/build/outputs/apk/release/app-release.apk
+      - name: Deploy to Firebase
+        run: |
+          echo $FIREBASE_TOKEN | firebase auth:import --token -
+          firebase appdistribution:distribute build/app/outputs/bundle/release/app-release.aab --app your-firebase-app-id --groups testers  # Replace with your app ID
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
