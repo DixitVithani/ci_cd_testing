@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v8
         with:
           flutter-version: '3.10.5'
 
@@ -25,22 +25,5 @@ jobs:
       - name: Build and Test
         run: flutter test
 
-
-  deploy:
-    name: Deploy Android Build
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Get Android Build from artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: android-release
-      - name: Release Build to internal track
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
-          packageName: "com.example.ci_cd_testing"
-          releaseFiles: app-release.aab
-          track: alpha
-          status: completed
+      - name: Build apk
+        run: flutter build apk
