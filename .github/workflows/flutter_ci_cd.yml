@@ -64,6 +64,6 @@ jobs:
       - name: Deploy to Firebase
         run: |
           echo $FIREBASE_TOKEN | firebase auth:import --token -
-          firebase appdistribution:distribute build/app/outputs/bundle/release/app-release.aab --app your-firebase-app-id --groups testers  # Replace with your app ID
+          firebase appdistribution:distribute build/app/outputs/bundle/release/app-release.aab --app  1:33608831841:android:cf839a4e8116557fafab20 --groups testers  # Replace with your app ID
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
