@@ -22,11 +22,11 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-#      - name: Build and Test
-#        run: flutter test
+      - name: Build and Test
+        run: flutter test
 
-#      - name: Build apk
-#        run: flutter build apk
+      - name: Build apk
+        run: flutter build apk
 
   deploy:
     name: Deploy
@@ -45,4 +45,4 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
           groups: 'my_app'
-          file: 'build/app/outputs/apk/debug/app-debug.apk'
+          file: 'build/app/outputs/flutter-apk/app-debug.apk'
