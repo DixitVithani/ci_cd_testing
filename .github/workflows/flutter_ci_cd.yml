@@ -49,14 +49,14 @@
 #
 name: Flutter
 
-on:  #events (push and pull_request)
+on: #events (push and pull_request)
   push:
     branches: master
 
 
 
-jobs:   #here we specify the jobs - We could have multiple jobs
-  build:  #name it something meaningful
+jobs: #here we specify the jobs - We could have multiple jobs
+  build: #name it something meaningful
     runs-on: ubuntu-latest   #runner: select a machine to use
 
     steps:
