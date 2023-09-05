@@ -39,6 +39,9 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
+      - name: List APK Contents
+        run: ls -R build/app/outputs/flutter-apk/
+
       - name: Deploy to Firebase Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
