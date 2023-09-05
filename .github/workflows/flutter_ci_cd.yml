@@ -26,7 +26,7 @@ jobs:
         run: flutter test
 
       - name: Build apk
-        run: flutter release apk
+        run: flutter build apk
 
   deploy:
     name: Deploy
