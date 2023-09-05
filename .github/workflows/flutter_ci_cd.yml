@@ -26,7 +26,7 @@ jobs:
         run: flutter test
 
       - name: Build apk
-        run: flutter build apk
+        run: flutter release apk
 
   deploy:
     name: Deploy
@@ -44,5 +44,5 @@ jobs:
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: 'my_app'
-          file: 'build/app/outputs/apk/debug/app-debug.apk'
+#          groups: 'my_app'
+#          file: 'build/app/outputs/apk/debug/app-debug.apk'
